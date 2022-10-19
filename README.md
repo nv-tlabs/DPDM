@@ -5,7 +5,7 @@
   <a href="http://latentspace.cc/" target="_blank">Arash&nbsp;Vahdat</a> &emsp; <b>&middot;</b> &emsp;
   <a href="https://karstenkreis.github.io/" target="_blank">Karsten&nbsp;Kreis</a>
   <br> <br>
-  <a href="https://arxiv.org/abs/xxx" target="_blank">Paper</a> &emsp;
+  <a href="https://arxiv.org/abs/2210.09929" target="_blank">Paper</a> &emsp;
   <a href="https://nv-tlabs.github.io/DPDM/" target="_blank">Project&nbsp;Page</a> 
 </div>
 <br><br>
