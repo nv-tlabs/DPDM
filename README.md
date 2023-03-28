@@ -107,7 +107,7 @@ python main.py --mode train --workdir <new_directory> --config <dataset>
 Our models are trained on eight NVIDIA A100 (80Gb) GPUs; you can set the number of GPUs per node via `setup.n_gpus_per_node`. We use large batch sizes which are split into several iterations; to reduce the required GPU memory, you may increase the flag `train.n_splits` (by a multiple of 2).
 
 ## Citation
-If you find the provided code or checkpoints useful for your research, please consider citing our NeurIPS paper:
+If you find the provided code or checkpoints useful for your research, please consider citing our paper:
 
 ```bib
 @article{dockhorn2022differentially,
