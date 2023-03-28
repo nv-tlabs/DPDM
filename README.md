@@ -130,4 +130,4 @@ Pre-trained checkpooints are licensed under the [Creative Commons Attribution-No
 
 For any code dependencies related to StyleGAN3 ([`stylegan3/`](./stylegan3/), [`torch_utils/`](./torch_utils/), and [`dnnlib/`](./dnnlib/)), the license is the  Nvidia Source Code License by NVIDIA Corporation, see [StyleGAN3 LICENSE](https://github.com/NVlabs/stylegan3/blob/main/LICENSE.txt).
 
-Our DPDMs are based on the [DDPM++](./higher_score_flow_code/models/score_sde_pytorch) architecture which is realeased under [Apache License 2.0](https://github.com/yang-song/score_sde_pytorch/blob/main/LICENSE).
+Our DPDMs are based on the [DDPM++](./model/) architecture which is realeased under [Apache License 2.0](https://github.com/yang-song/score_sde_pytorch/blob/main/LICENSE).
