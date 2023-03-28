@@ -146,7 +146,6 @@ def training(config, workdir, mode):
                 n_splits=config.dp.n_splits if config.dp.n_splits > 0 else None) as memory_safe_data_loader:
 
             for _, (train_x, train_y) in enumerate(memory_safe_data_loader):
-                print(train_x, train_y)
                 if state['step'] % config.train.snapshot_freq == 0 and state['step'] >= config.train.snapshot_threshold and config.setup.global_rank == 0:
                     logging.info(
                         'Saving snapshot checkpoint and sampling single batch at iteration %d.' % state['step'])

@@ -53,9 +53,9 @@ train:
   fid_samples: 5000
   fid_threshold: 1
 loss: 
-  version: edm
-  p_mean: -1.2
-  p_std: 1.2
+  version: v
+  logsnr_min: -9.
+  logsnr_max: 13.
   n_noise_samples: 32
   n_classes: 10
 dp:
