@@ -1,0 +1,11 @@
+--extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.11.0+cu113 
+torchvision==0.12.0+cu113
+omegaconf==2.1.1
+numpy==1.22.4
+pillow==9.2.0
+tqdm==4.62.2
+scipy==1.7.1
+matplotlib==3.6.1
+ninja==1.10.2
+-e git+https://github.com/timudk/opacus_dpdm.git@dpdm#egg=opacus

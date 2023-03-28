@@ -1,0 +1,66 @@
+setup:
+  runner: train_dpdm_base
+  n_gpus_per_node: 8
+  n_nodes: 1
+  node_rank: 0
+  master_address: '127.0.0.1'
+  master_port: 6020
+  omp_n_threads: 64
+data:
+  path: 
+  name: mnist_28
+  num_channels: 1
+  resolution: 28
+  n_classes: 10
+  fid_stats: 
+  - assets/stats/mnist_train.npz
+  one_hot: False
+  dataloader_params:
+    num_workers: 1
+model:
+  denoiser_name: edm
+  denoiser_network: song
+  ema_rate: .999
+  network:
+    image_size: 28
+    attn_resolutions:
+    - 7
+optim:
+  optimizer: Adam
+  params:
+    lr: 3e-4
+    weight_decay: 0.
+sampler:
+  type: ddim
+  stochastic: False
+  num_steps: 50
+  tmin: .002
+  tmax: 80.
+  rho: 7.
+  guid_scale: 0.
+  snapshot_batch_size: 64
+  fid_batch_size: 64
+train:
+  seed: 0
+  batch_size: 4096
+  n_epochs: 300
+  log_freq: 100
+  snapshot_freq: 1000
+  snapshot_threshold: 1
+  save_freq: 100000
+  save_threshold: 1
+  fid_freq: 10000
+  fid_samples: 5000
+  fid_threshold: 1
+loss: 
+  version: edm
+  p_mean: -1.2
+  p_std: 1.2
+  n_noise_samples: 32
+  n_classes: 10
+dp:
+  max_grad_norm: 1.
+  delta: 1e-5
+  epsilon: 10.
+  max_physical_batch_size: 8192
+  n_splits: 4

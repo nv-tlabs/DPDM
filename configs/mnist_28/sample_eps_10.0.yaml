@@ -1,0 +1,34 @@
+setup:
+  runner: generate_base
+  n_gpus_per_node: 1
+  n_nodes: 1
+  node_rank: 0
+  master_address: '127.0.0.1'
+  master_port: 6020
+  omp_n_threads: 64
+data:
+  num_channels: 1
+  resolution: 28
+  n_classes: 10
+model:
+  denoiser_name: edm
+  denoiser_network: song
+  ema_rate: .999
+  use_ema: True
+  network:
+    image_size: 28
+    attn_resolutions:
+    - 7
+sampler:
+  type: ddim
+  stochastic: False
+  num_steps: 50
+  tmin: .002
+  tmax: 80.
+  rho: 7.
+  guid_scale: 0.
+  batch_size: 16
+  labels: 10
+test:
+  n_samples: 16
+  seed: 0
