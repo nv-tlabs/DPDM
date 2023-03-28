@@ -26,16 +26,16 @@ import numpy as np
 from .normalization import ConditionalInstanceNorm2dPlus
 
 
-def get_act(config):
+def get_act(nonlinearity):
   """Get activation functions from the config file."""
 
-  if config.model.nonlinearity.lower() == 'elu':
+  if nonlinearity == 'elu':
     return nn.ELU()
-  elif config.model.nonlinearity.lower() == 'relu':
+  elif nonlinearity == 'relu':
     return nn.ReLU()
-  elif config.model.nonlinearity.lower() == 'lrelu':
+  elif nonlinearity == 'lrelu':
     return nn.LeakyReLU(negative_slope=0.2)
-  elif config.model.nonlinearity.lower() == 'swish':
+  elif nonlinearity == 'swish':
     return nn.SiLU()
   else:
     raise NotImplementedError('activation function does not exist!')
@@ -543,16 +543,40 @@ def contract_inner(x, y):
   return _einsum(x_chars, y_chars, out_chars, x, y)
 
 
-class NIN(nn.Module):
-  def __init__(self, in_dim, num_units, init_scale=0.1):
-    super().__init__()
-    self.W = nn.Parameter(default_init(scale=init_scale)((in_dim, num_units)), requires_grad=True)
-    self.b = nn.Parameter(torch.zeros(num_units), requires_grad=True)
+# class NIN(nn.Module):
+#   def __init__(self, in_dim, num_units, init_scale=0.1):
+#     super().__init__()
+#     self.W = nn.Parameter(default_init(scale=init_scale)((in_dim, num_units)), requires_grad=True)
+#     self.b = nn.Parameter(torch.zeros(num_units), requires_grad=True)
 
-  def forward(self, x):
-    x = x.permute(0, 2, 3, 1)
-    y = contract_inner(x, self.W) + self.b
-    return y.permute(0, 3, 1, 2)
+#   def forward(self, x):
+#     x = x.permute(0, 2, 3, 1)
+#     y = contract_inner(x, self.W) + self.b
+#     return y.permute(0, 3, 1, 2)
+
+class NIN(nn.Module):
+    def __init__(self, in_dim, num_units, init_scale=0.1):
+        super().__init__()
+        self.W = nn.Parameter(default_init(scale=init_scale)(
+            (in_dim, num_units)), requires_grad=True)
+        self.b = nn.Parameter(torch.zeros(num_units), requires_grad=True)
+
+    def forward(self, x):
+        x = x.permute(0, 2, 3, 1)
+        y = contract_inner(x, self.W) + self.b
+        return y.permute(0, 3, 1, 2)
+    
+import importlib
+opacus = importlib.import_module('src.opacus')
+
+from opacus.grad_sample import register_grad_sampler
+@register_grad_sampler(NIN)
+def compute_nin_grad_sample(layer, activations, backprops):
+    gs = torch.einsum('nkhw,nehw->nek', backprops, activations)
+    ret = {layer.W: gs}
+    ret[layer.b] = torch.einsum('nchw->nc', backprops)
+
+    return ret
 
 
 class AttnBlock(nn.Module):
