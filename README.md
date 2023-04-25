@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ## Pretrained checkpoints
 
-We provide pre-trained checkpoints for all models presented in the paper [here](https://drive.google.com/drive/folders/1TQ48z51j0omIHpDsGg7pkGgbB0ivM17V?usp=share_link). You can sample from the checkpoint using the following command:
+We provide pre-trained checkpoints for all models presented in the paper [here](https://drive.google.com/drive/folders/1znz8xHrLXpVA1g-zy38U5Nwfjl2t8ewv). You can sample from the checkpoint using the following command:
 
 ```shell script
 python main.py --mode eval --workdir <new_directory> --config <config_file> -- model.ckpt=<checkpoint_path>
