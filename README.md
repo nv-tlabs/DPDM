@@ -1,4 +1,5 @@
-## <p align="center">Differentially Private Diffusion Models</p>
+# <p align="center">Differentially Private Diffusion Models <br><br> TMLR 2023</p>
+
 <div align="center">
   <a href="https://timudk.github.io/" target="_blank">Tim&nbsp;Dockhorn</a> &emsp; <b>&middot;</b> &emsp;
   <a href="https://orcid.org/0000-0001-6579-6044" target="_blank">Tianshi&nbsp;Cao</a> &emsp; <b>&middot;</b> &emsp;
@@ -112,9 +113,11 @@ If you find the provided code or checkpoints useful for your research, please co
 ```bib
 @article{dockhorn2022differentially,
     title={{Differentially Private Diffusion Models}},
-    author={Dockhorn, Tim and Cao, Tianshi and Vahdat, Arash and Kreis, Karsten},
-    journal={arXiv:2210.09929},
-    year={2022}
+    author={Tim Dockhorn and Tianshi Cao and Arash Vahdat and Karsten Kreis},
+    journal={Transactions on Machine Learning Research},
+    issn={2835-8856},
+    year={2023},
+    url={https://openreview.net/forum?id=ZPpQk7FJXF}
 }
 ```
 
